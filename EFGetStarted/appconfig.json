@@ -1,0 +1,5 @@
+{
+    "ConnectionStrings": {
+        "blogConnection": "Data Source=blogging.db;"
+    }
+}

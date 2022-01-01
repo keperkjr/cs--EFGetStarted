@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace EFGetStarted
 {
@@ -20,8 +21,17 @@ namespace EFGetStarted
 
         // The following configures EF to create a Sqlite database file in the
         // special "local" folder for your platform.
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //    => options.UseSqlite($"Data Source={DbPath}");
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={DbPath}");
+        {
+            var config = new ConfigurationBuilder()
+                    //.SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                    .AddJsonFile("appconfig.json", optional: false).Build();
+            options.UseSqlite(config.GetConnectionString("blogConnection"));
+        }
+
     }
 
     public class Blog

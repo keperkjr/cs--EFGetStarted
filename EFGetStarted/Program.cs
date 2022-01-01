@@ -5,6 +5,12 @@ namespace EFGetStarted
 {
     internal class Program
     {
+        /* Need to install:
+
+            For loading config:
+                Microsoft.Extensions.Configuration.Json
+                Microsoft.Extensions.Configuration
+        */
         private static void Main()
         {
             using (var db = new BloggingContext())
