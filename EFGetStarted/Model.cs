@@ -12,26 +12,38 @@ namespace EFGetStarted
 
         public string DbPath { get; }
 
+        public BloggingContext(DbContextOptions<BloggingContext> options)
+             : base(options)
+        {
+        }
         public BloggingContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            DbPath = System.IO.Path.Join(path, "blogging.db");
         }
 
         // The following configures EF to create a Sqlite database file in the
         // special "local" folder for your platform.
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //    => options.UseSqlite($"Data Source={DbPath}");
-
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            var config = new ConfigurationBuilder()
-                    //.SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                    .AddJsonFile("appconfig.json", optional: false).Build();
-            options.UseSqlite(config.GetConnectionString("blogConnection"));
+            options.UseSqlite(ConnectionsString);
         }
 
+        private string GetConnectionsString()
+        {
+            var config = new ConfigurationBuilder()
+                    .AddJsonFile("appconfig.json", optional: false).Build();
+            return config.GetConnectionString("blogConnection");
+        }
+
+        private string mConnection = null;
+        public string ConnectionsString { 
+            get { 
+                if (mConnection == null)
+                {
+                    mConnection = GetConnectionsString();
+                }
+                return mConnection;
+            } 
+        }
     }
 
     public class Blog

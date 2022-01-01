@@ -1,5 +1,5 @@
 {
     "ConnectionStrings": {
-        "blogConnection": "Data Source=blogging.db;"
+        "blogConnection": "Data Source=C:\\Users\\Jr\\source\\repos\\EFGetStarted\\EFGetStarted\\blogging.db;"
     }
 }
