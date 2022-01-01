@@ -6,7 +6,10 @@ namespace EFGetStarted
     internal class Program
     {
         /* Need to install:
-
+            For entity:
+                Microsoft.EntityFrameworkCore
+                Microsoft.EntityFrameworkCore.Sqlite
+                Microsoft.EntityFrameworkCore.Tools
             For loading config:
                 Microsoft.Extensions.Configuration.Json
                 Microsoft.Extensions.Configuration
